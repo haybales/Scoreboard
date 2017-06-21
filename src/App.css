@@ -1,0 +1,90 @@
+
+
+body{
+  background: #FAFAFA;
+  color: #222;
+  font-family: arial, sans-serif !important;
+}
+
+
+.scoreboard{
+  margin: 10em auto;
+  width: 600px;
+  background: #444;
+  border-radius: 1em;
+  color: #FFF0F0;
+  padding-bottom: 1em;
+  box-shadow: rgba(0,0,0,0.3) 0 0 5px;
+}
+
+h1{
+  margin: 0;
+  padding: 0.5em;
+  font-weight: lighter;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1.75em;
+}
+
+.header{
+  text-align: center;
+  border-bottom: 2px solid #777;
+}
+
+.players{
+  background: #555;
+  font-size: 20px;
+
+}
+
+.player{
+  height: 3em;
+  width: 100%;
+  display: block;
+  border-bottom: 2px solid #777;
+}
+
+.player-name{
+  float: left;
+  padding: 1em 0 0 1em;
+  font-weight: lighter;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+}
+
+.counter{
+  float: right;
+}
+
+.counter-action{
+  display: inline;
+  font-size: 20px;
+  height: 3em;
+  width: 3em;
+  color: #F0F0F0;
+  border: none;
+}
+
+.increment{
+  background: #7D7;
+}
+.increment:active{
+  background: #5B5;
+}
+
+
+.decrement{
+  background: #D77;
+}
+.decrement:active{
+  background: #B55;
+}
+
+.counter-score{
+  display: inline-block;
+  text-align: center;
+  width: 3em;
+  letter-spacing: 0.1em;
+  font-family: monospace;
+}
