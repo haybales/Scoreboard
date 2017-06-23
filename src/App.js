@@ -1,36 +1,76 @@
 import React, { Component } from 'react';
 import './App.css';
 
+var AddPlayerForm = React.createClass({
+
+  getInitialState: function(){
+    return{
+      value: '',
+
+    };
+  },
+
+  handleChange: function(e){
+    return(this.setState({value: e.target.value}));
+  },
+
+  render: function(){
+    return(
+      <div className="add-player-form">
+        <form onSubmit={this.onSubmit}>
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          <input type="submit" value="Add Player" />
+        </form>
+      </div>
+    );
+  },
+  propTypes: {
+    onAddPlayer: React.PropTypes.func.isRequired,
+  },
+  onSubmit: function(e){
+    e.preventDefault();
+    this.props.onAddPlayer(this.state.value);
+    this.setState({value: ''});
+  },
+
+});
 
 
 function Header(props){
   return (
     <div className="header">
-      <Stats />
+      <Stats players={props.players}/>
       <h1>{props.title}</h1>
     </div>
   );
 }
+Header.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  players: React.PropTypes.array.isRequired,
+};
 
 function Stats(props){
+  var totalPlayers = props.players.length;
+  var totalPoints = props.players.reduce(function(total, player){
+    return total + player.score;
+  }, 0);
   return(
     <table className="stats">
       <tbody>
         <tr>
           <td>Players:</td>
-          <td>2</td>
+          <td>{totalPlayers}</td>
         </tr>
         <tr>
           <td>Total Points:</td>
-          <td>123</td>
+          <td>{totalPoints}</td>
         </tr>
       </tbody>
     </table>
   )
 }
-
-Header.propTypes = {
-  title: React.PropTypes.string.isRequired
+Stats.propTypes = {
+  players: React.PropTypes.array.isRequired,
 };
 
 
@@ -75,10 +115,19 @@ var App = React.createClass({
     this.setState(this.state);
   },
 
+  addPlayer: function(inputName){
+    this.state.players.push({
+      name: inputName,
+      score: 0,
+      id: this.state.players.length+1,
+    });
+    this.setState(this.state);
+  },
+
   render: function(){
     return(
       <div className="scoreboard">
-        <Header title={this.props.title} />
+        <Header title={this.props.title} players={this.state.players} />
 
         <div className="players">
           {this.state.players.map(function(player, index){
@@ -91,6 +140,7 @@ var App = React.createClass({
             );
           }.bind(this))}
         </div>
+        <AddPlayerForm onAddPlayer={function(newName){this.addPlayer(newName)}.bind(this)}/>
       </div>
     );
   },
