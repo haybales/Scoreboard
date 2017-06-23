@@ -17,6 +17,25 @@ body{
   box-shadow: rgba(0,0,0,0.3) 0 0 5px;
 }
 
+.stats{
+  float: left;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+}
+
+td{
+  text-align: left;
+  font-weight: lighter;
+}
+td:first-child{
+  text-align: right;
+  color: #777;
+  font-weight: bold;
+}
+
 h1{
   margin: 0;
   padding: 0.5em;
