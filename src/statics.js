@@ -1,11 +1,12 @@
 import React from 'react';
-
+import Stopwatch from './Stopwatch';
 
 export function Header(props){
   return (
     <div className="header">
       <Stats players={props.players}/>
       <h1>{props.title}</h1>
+      <Stopwatch />
     </div>
   );
 }
