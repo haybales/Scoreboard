@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
-var AddPlayerForm = React.createClass({
+var nextId = 4;
 
+var AddPlayerForm = React.createClass({
   getInitialState: function(){
     return{
       value: '',
@@ -94,6 +95,7 @@ function Player(props){
   return(
     <div className="player">
       <div className="player-name">
+        <a className="remove-player" onClick={props.onRemove}>✖</a>
         {props.name}
       </div>
       <Counter score={props.score} onChange={props.onScoreChange}/>
@@ -105,6 +107,7 @@ Player.propTypes={
   name: React.PropTypes.string.isRequired,
   score: React.PropTypes.number.isRequired,
   onScoreChange: React.PropTypes.func.isRequired,
+  onRemove: React.PropTypes.func.isRequired,
 }
 
 
@@ -119,8 +122,14 @@ var App = React.createClass({
     this.state.players.push({
       name: inputName,
       score: 0,
-      id: this.state.players.length+1,
+      id: nextId,
     });
+    this.setState(this.state);
+    nextId++;
+  },
+
+  onRemovePlayer: function(index){
+    this.state.players.splice(index, 1);
     this.setState(this.state);
   },
 
@@ -133,6 +142,7 @@ var App = React.createClass({
           {this.state.players.map(function(player, index){
             return (
               <Player
+                onRemove={function(){this.onRemovePlayer(index)}.bind(this)}
                 onScoreChange={function(delta){this.onScoreChange(index, delta)}.bind(this)}
                 name={player.name}
                 score={player.score}
