@@ -25,11 +25,11 @@ var AddPlayerForm = React.createClass({
     );
   },
   propTypes: {
-    onAddPlayer: React.PropTypes.func.isRequired,
+    addPlayer: React.PropTypes.func.isRequired,
   },
   onSubmit: function(e){
     e.preventDefault();
-    this.props.onAddPlayer(this.state.value);
+    this.props.addPlayer(this.state.value);
     this.setState({value: ''});
   },
 
@@ -115,7 +115,7 @@ var App = React.createClass({
     this.setState(this.state);
   },
 
-  addPlayer: function(inputName){
+  onAddPlayer: function(inputName){
     this.state.players.push({
       name: inputName,
       score: 0,
@@ -140,7 +140,7 @@ var App = React.createClass({
             );
           }.bind(this))}
         </div>
-        <AddPlayerForm onAddPlayer={function(newName){this.addPlayer(newName)}.bind(this)}/>
+        <AddPlayerForm addPlayer={this.onAddPlayer}/>
       </div>
     );
   },
